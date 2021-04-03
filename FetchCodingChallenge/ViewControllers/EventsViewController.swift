@@ -9,8 +9,6 @@ import UIKit
 
 class EventsViewController: UITableViewController, UISearchBarDelegate {
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
             title = "Events"
