@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import SnapKit
 
 class EventViewCell: UITableViewCell {
 
@@ -69,5 +70,60 @@ class EventViewCell: UITableViewCell {
     
     private func setupLayouts() {
         
+        eventImageView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().inset(18)
+            make.top.equalToSuperview().inset(24)
+            make.width.equalToSuperview().multipliedBy(0.35)
+            make.height.equalTo(eventImageView.snp.width)
+        }
+        
+        eventLabel.snp.makeConstraints { (make) in
+            make.top.leading.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.95)
+        }
+        
+        eventLocationLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(eventLabel.snp.bottom).offset(12)
+            make.width.equalToSuperview().multipliedBy(0.95)
+            make.leading.equalToSuperview()
+        }
+        
+        dateLabel.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().multipliedBy(0.95)
+            make.top.equalTo(eventLocationLabel.snp.bottom).offset(6)
+            make.leading.equalToSuperview()
+        }
+        
+        heartIcon.snp.makeConstraints { (make) in
+            make.top.leading.equalTo(eventImageView).inset(-16)
+            make.width.height.equalTo(40)
+        }
+        
+        containerView.snp.makeConstraints { (make) in
+            make.top.equalTo(eventImageView)
+            make.leading.equalTo(eventImageView.snp.trailing).offset(24)
+            make.trailing.equalToSuperview().inset(12)
+        }
+        
     }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        addSubview(eventImageView)
+        addSubview(containerView)
+        addSubview(heartIcon)
+
+        containerView.addSubview(eventLabel)
+        containerView.addSubview(eventLocationLabel)
+        containerView.addSubview(dateLabel)
+        
+        setupLayouts()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError()
+    }
+    
+  
 }
